@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "buildCommand": null,
+  "buildCommand": "echo 'no build needed'",
   "outputDirectory": "public",
   "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
-    },
     {
       "source": "/((?!api/).*)",
       "destination": "/"
