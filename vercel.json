@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "echo 'no build needed'",
-  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/((?!api/).*)",
