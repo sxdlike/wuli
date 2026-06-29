@@ -1,24 +1,3 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "**/*.{html,css,js,svg,png,jpg,jpeg,gif,webp,ico,json,woff,woff2,ttf,eot}",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api/ai-chat.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/ai-chat.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "cleanUrls": true
+  "version": 2
 }
