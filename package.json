@@ -1,0 +1,26 @@
+{
+  "name": "wuli-app",
+  "version": "1.0.0",
+  "description": "物历 WùLì - 物品数字档案 | AI管家 · 闲置流转 · 家庭守护",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "物历",
+    "物品管理",
+    "AI管家",
+    "闲置流转",
+    "家庭守护"
+  ],
+  "author": "物历团队",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^54.18.2",
+    "wrangler": "^4.105.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "env": {
+    "AI_API_KEY": "@ai_api_key",
+    "AI_API_URL": "https://api.deepseek.com/chat/completions",
+    "AI_MODEL": "deepseek-chat",
+    "MAX_TOKENS": "500",
+    "ALLOWED_ORIGIN": "*"
+  }
+}

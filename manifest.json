@@ -1,0 +1,43 @@
+{
+  "name": "物历 WùLì - 物品数字档案",
+  "short_name": "物历",
+  "description": "一物一档，让每件物品都有专属数字档案。AI管家、闲置流转、家庭守护，全方位管理你的物品。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8F3",
+  "theme_color": "#4A7C5C",
+  "orientation": "portrait",
+  "lang": "zh-CN",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "utilities", "productivity"],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
