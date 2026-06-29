@@ -13,22 +13,49 @@
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
   <link rel="apple-touch-icon" href="/icon.svg">
   <title>物历 WùLì - 物品数字档案</title>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  
+  <!-- 性能优化：预连接关键资源 -->
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  
+  <!-- 图标库 -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
   <style>
+    /* ========== CSS 变量（设计系统）========== */
     :root {
-      --bg-warm: #FDF8F3;
-      --bg-paper: #F9F3EB;
-      --bg-card: #FFFFFF;
+      /* 主色调 */
       --color-primary: #4A7C5C;
       --color-primary-light: #6B9B7D;
       --color-primary-soft: #E8F0EB;
+      --color-primary-dark: #3A6249;
+      
+      /* 辅助色 */
       --color-secondary: #B8956A;
       --color-secondary-light: #D4B896;
       --color-accent: #C86B4F;
       --color-accent-soft: #F5E6DF;
+      
+      /* 功能色 */
+      --color-success: #4CAF50;
+      --color-warning: #FF9800;
+      --color-error: #E57373;
+      --color-info: #2196F3;
+      
+      /* 文字色 */
       --color-text: #4A4239;
       --color-text-secondary: #8B7E72;
       --color-text-light: #C4B8AD;
+      --color-text-inverse: #FFFFFF;
+      
+      /* 背景色 */
+      --bg-warm: #FDF8F3;
+      --bg-paper: #F9F3EB;
+      --bg-card: #FFFFFF;
+      --bg-overlay: rgba(74, 66, 57, 0.5);
+      --bg-gradient: linear-gradient(135deg, #2C2C2C 0%, #1a1a1a 100%);
+      
+      /* 特色色 */
       --color-cream: #FFF9F2;
       --color-cream-dark: #F5EDE3;
       --color-honey: #D4A84B;
@@ -36,21 +63,77 @@
       --color-sage: #7D9B8A;
       --color-pink: #E8B4B8;
       --color-sky: #7BA3C4;
+      
+      /* 阴影 */
+      --shadow-xs: 0 1px 4px rgba(74, 66, 57, 0.04);
       --shadow-soft: 0 2px 12px rgba(74, 66, 57, 0.06);
       --shadow-medium: 0 4px 20px rgba(74, 66, 57, 0.1);
       --shadow-warm: 0 6px 24px rgba(184, 149, 106, 0.18);
       --shadow-card: 0 2px 16px rgba(74, 66, 57, 0.08);
+      --shadow-lg: 0 8px 32px rgba(74, 66, 57, 0.12);
+      --shadow-xl: 0 12px 48px rgba(74, 66, 57, 0.16);
+      
+      /* 圆角 */
       --radius-xs: 8px;
       --radius-sm: 12px;
       --radius-md: 16px;
       --radius-lg: 24px;
       --radius-xl: 32px;
-      --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --radius-full: 9999px;
+      
+      /* 字体 */
+      --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      
+      /* 字号 */
+      --text-xs: 11px;
+      --text-sm: 12px;
+      --text-base: 14px;
+      --text-lg: 16px;
+      --text-xl: 18px;
+      --text-2xl: 20px;
+      --text-3xl: 24px;
+      
+      /* 间距 */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      
+      /* 动画 */
       --transition-fast: 0.15s ease;
       --transition-normal: 0.25s ease;
       --transition-slow: 0.35s ease;
+      --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      
+      /* 层级 */
+      --z-dropdown: 100;
+      --z-sticky: 200;
+      --z-fixed: 300;
+      --z-modal-backdrop: 400;
+      --z-modal: 500;
+      --z-popover: 600;
+      --z-tooltip: 700;
+      --z-toast: 800;
     }
+    
+    /* 深色模式支持 */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-text: #E8E0D8;
+        --color-text-secondary: #A89F95;
+        --bg-warm: #1A1A1A;
+        --bg-paper: #252525;
+        --bg-card: #2A2A2A;
+      }
+    }
+  </style>
 
     * {
       margin: 0;
@@ -306,18 +389,51 @@
       padding: 18px;
       box-shadow: var(--shadow-soft);
       margin-bottom: 14px;
-      transition: all var(--transition-fast);
+      transition: all var(--transition-normal);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      will-change: transform, box-shadow;
     }
-
+    
     .card:hover {
       box-shadow: var(--shadow-medium);
+      transform: translateY(-4px);
     }
-
+    
     .card:active {
-      transform: scale(0.98);
+      transform: scale(0.98) translateY(0);
       box-shadow: var(--shadow-soft);
+      transition-duration: 0.1s;
     }
+    
+    /* 卡片入场动画 */
+    .card-animate-in {
+      animation: cardSlideIn 0.4s var(--transition-spring) forwards;
+      opacity: 0;
+    }
+    
+    @keyframes cardSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    /* 卡片交错入场动画 */
+    .card:nth-child(1) { animation-delay: 0ms; }
+    .card:nth-child(2) { animation-delay: 50ms; }
+    .card:nth-child(3) { animation-delay: 100ms; }
+    .card:nth-child(4) { animation-delay: 150ms; }
+    .card:nth-child(5) { animation-delay: 200ms; }
+    .card:nth-child(6) { animation-delay: 250ms; }
+    .card:nth-child(7) { animation-delay: 300ms; }
+    .card:nth-child(8) { animation-delay: 350ms; }
 
     .card-header {
       display: flex;
@@ -512,11 +628,59 @@
       font-weight: 500;
       cursor: pointer;
       border: none;
-      transition: all var(--transition-fast);
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
-
+    
+    /* 按钮点击涟漪效果 */
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .btn:active::after {
+      width: 300px;
+      height: 300px;
+    }
+    
     .btn:active {
-      transform: scale(0.97);
+      transform: scale(0.97) translateY(2px);
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    /* 按钮加载状态 */
+    .btn.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    
+    .btn.loading::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: btn-spin 0.8s linear infinite;
+    }
+    
+    @keyframes btn-spin {
+      to { transform: rotate(360deg); }
     }
 
     .btn-primary {
@@ -2439,25 +2603,78 @@
     }
 
     /* Page transition enhanced */
+    /* 页面过渡动画 */
     .page-transition-enter {
       opacity: 0;
-      transform: translateX(20px);
+      transform: translateX(30px) scale(0.95);
     }
-
+    
     .page-transition-enter-active {
       opacity: 1;
-      transform: translateX(0);
-      transition: all 0.3s ease;
+      transform: translateX(0) scale(1);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-
+    
     .page-transition-exit {
       opacity: 1;
+      transform: translateX(0);
     }
-
+    
     .page-transition-exit-active {
       opacity: 0;
-      transform: translateX(-20px);
-      transition: all 0.3s ease;
+      transform: translateX(-30px) scale(0.95);
+      transition: all 0.25s ease-in;
+    }
+    
+    /* 滑动手势提示 */
+    .swipe-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(74, 66, 57, 0.8);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      animation: swipeHintPulse 2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    @keyframes swipeHintPulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+    }
+    
+    /* 加载骨架屏 */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-paper) 25%, var(--bg-card) 50%, var(--bg-paper) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: var(--radius-sm);
+    }
+    
+    @keyframes skeleton-loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .skeleton-text {
+      height: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .skeleton-title {
+      height: 20px;
+      width: 60%;
+      margin-bottom: 12px;
+    }
+    
+    .skeleton-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
     }
 
     /* Auth Pages */
@@ -3138,6 +3355,146 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // ==================== 性能优化工具函数 ====================
+    
+    // 防抖函数
+    function debounce(func, wait = 300) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+    
+    // 节流函数
+    function throttle(func, limit = 100) {
+      let inThrottle;
+      return function executedFunction(...args) {
+        if (!inThrottle) {
+          func(...args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      };
+    }
+    
+    // 一次性防抖（用于搜索输入等场景）
+    function debounceImmediate(func, wait = 300) {
+      let timeout;
+      return function executedFunction(...args) {
+        const context = this;
+        const later = () => {
+          timeout = null;
+          if (!timeout) func.apply(context, args);
+        };
+        const callNow = !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    }
+    
+    // 图片懒加载（Intersection Observer）
+    function initLazyLoading() {
+      if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              img.classList.remove('lazy');
+              observer.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '50px 0px',
+          threshold: 0.01
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+      }
+    }
+    
+    // 性能监控
+    function logPerformance() {
+      if (window.performance) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        console.log(`页面加载时间: ${pageLoadTime}ms`);
+      }
+    }
+    
+    // GPU加速优化
+    function enableGPUAcceleration() {
+      const elements = document.querySelectorAll('.card, .widget-card, .btn');
+      elements.forEach(el => {
+        el.style.willChange = 'transform';
+        el.style.backfaceVisibility = 'hidden';
+      });
+    }
+    
+    // 虚拟滚动（用于长列表）
+    class VirtualScroll {
+      constructor(container, itemHeight, renderItem) {
+        this.container = container;
+        this.itemHeight = itemHeight;
+        this.renderItem = renderItem;
+        this.items = [];
+        this.scrollTop = 0;
+      }
+      
+      setItems(items) {
+        this.items = items;
+        this.render();
+      }
+      
+      render() {
+        const visibleCount = Math.ceil(this.container.clientHeight / this.itemHeight);
+        const startIndex = Math.floor(this.scrollTop / this.itemHeight);
+        const endIndex = Math.min(startIndex + visibleCount + 2, this.items.length);
+        
+        this.container.style.height = `${this.items.length * this.itemHeight}px`;
+        this.container.style.position = 'relative';
+        
+        const fragment = document.createDocumentFragment();
+        for (let i = startIndex; i < endIndex; i++) {
+          const item = this.renderItem(this.items[i], i);
+          item.style.position = 'absolute';
+          item.style.top = `${i * this.itemHeight}px`;
+          item.style.width = '100%';
+          fragment.appendChild(item);
+        }
+        
+        this.container.innerHTML = '';
+        this.container.appendChild(fragment);
+      }
+      
+      onScroll(scrollTop) {
+        this.scrollTop = scrollTop;
+        requestAnimationFrame(() => this.render());
+      }
+    }
+    
+    // 请求动画帧节流
+    const rafThrottle = (callback) => {
+      let ticking = false;
+      return (event) => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            callback(event);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+    };
+    
     // ==================== 数据定义 ====================
     const CATEGORIES = {
       '家电': { color: '#3D5A4C', icon: 'tv' },
@@ -6435,15 +6792,75 @@
 
         const aiHtml = finalResponse.replace(/\n/g, '<br>') + actionsHtml;
 
+        // 创建AI消息容器用于打字机效果
+        const aiMessageId = `ai-message-${Date.now()}`;
         messagesContainer.innerHTML += `
-          <div class="chat-message ai">
-            <div class="chat-bubble">${aiHtml}</div>
+          <div class="chat-message ai" id="${aiMessageId}">
+            <div class="chat-bubble"></div>
           </div>
         `;
 
         lucide.createIcons();
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        // 打字机效果
+        typeWriter(document.querySelector(`#${aiMessageId} .chat-bubble`), aiHtml, 20);
+
+        // 记录到历史
+        AppState.chatHistory[chatKey].push({ role: 'ai', content: finalResponse });
       }, baseDelay);
+    }
+
+    // 打字机效果函数
+    function typeWriter(element, html, speed = 30) {
+      // 先解析HTML标签
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      const text = tempDiv.textContent;
+      
+      let charIndex = 0;
+      let currentHtml = '';
+      let isTag = false;
+      let tagBuffer = '';
+      
+      function type() {
+        if (charIndex < html.length) {
+          const char = html[charIndex];
+          
+          if (char === '<') {
+            isTag = true;
+            tagBuffer = '<';
+          } else if (char === '>') {
+            isTag = false;
+            tagBuffer += '>';
+            currentHtml += tagBuffer;
+            tagBuffer = '';
+          } else if (isTag) {
+            tagBuffer += char;
+          } else {
+            currentHtml += char;
+          }
+          
+          element.innerHTML = currentHtml;
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          
+          // 标签内部快速显示，普通文字逐字显示
+          const delay = isTag ? 0 : (char === ' ' || char === '，' || char === '。' || char === '\n' ? speed * 2 : speed);
+          
+          charIndex++;
+          setTimeout(type, delay);
+        } else {
+          // 打字完成，添加完成标记
+          element.classList.add('typing-complete');
+        }
+      }
+      
+      // 初始化messagesContainer引用
+      if (typeof messagesContainer === 'undefined') {
+        messagesContainer = document.getElementById('chatMessages');
+      }
+      
+      type();
     }
 
     function handleChatAction(itemId, action, type) {
