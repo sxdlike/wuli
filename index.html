@@ -5967,33 +5967,91 @@
       const detail = MODULE_DETAILS[moduleId];
       if (!detail) return;
 
-      showModal(`
-        <div style="text-align:center;padding:16px 0 24px;">
-          <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--color-primary-soft),var(--color-cream));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(74,124,92,0.15);">
-            <i data-lucide="${detail.icon}" style="width:36px;height:36px;color:var(--color-primary);"></i>
-          </div>
-          <h3 style="font-size:20px;font-weight:700;color:var(--color-text);margin-bottom:8px;">${detail.title}</h3>
-          <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:24px;">${detail.desc}</p>
-          
-          <div style="background:var(--color-cream);border-radius:var(--radius-md);padding:18px;margin-bottom:16px;text-align:left;">
-            <div style="font-size:13px;font-weight:600;color:var(--color-text);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-              <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--color-honey);"></i>
-              使用技巧
+      let content = '';
+      if (moduleId === 'idle') {
+        const idleItems = AppState.items.filter(item => item.status === 'idle' || item.isIdle);
+        content = `
+          <div style="text-align:center;padding:16px 0 24px;">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--color-primary-soft),#D4E8DB);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(74,124,92,0.15);">
+              <i data-lucide="${detail.icon}" style="width:36px;height:36px;color:var(--color-sage);"></i>
             </div>
-            ${detail.tips.map(tip => `
-              <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:13px;color:var(--color-text-secondary);line-height:1.5;">
-                <span style="color:var(--color-primary);font-weight:600;">•</span>
-                <span>${tip}</span>
+            <h3 style="font-size:20px;font-weight:700;color:var(--color-text);margin-bottom:8px;">${detail.title}</h3>
+            <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:24px;">${detail.desc}</p>
+            
+            <div style="background:var(--color-cream);border-radius:var(--radius-md);padding:18px;margin-bottom:16px;text-align:left;">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+                <i data-lucide="package" style="width:16px;height:16px;color:var(--color-sage);"></i>
+                正在流转的物品 (${idleItems.length}件)
               </div>
-            `).join('')}
+              ${idleItems.length > 0 ? idleItems.map(item => `
+                <div class="card" style="padding:14px;margin-bottom:10px;cursor:pointer;" onclick="showItemDetail('${item.id}');hideModal();">
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div style="width:50px;height:50px;background:var(--color-primary-soft);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;">
+                      ${item.icon || '📦'}
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:15px;font-weight:600;color:var(--color-text);">${item.name}</div>
+                      <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px;">${item.brand} · ${item.model || item.category}</div>
+                    </div>
+                    <div style="text-align:right;">
+                      <div style="font-size:14px;font-weight:600;color:var(--color-sage);">${item.price || '免费'}</div>
+                      <div style="font-size:11px;color:var(--color-text-secondary);">${item.idleType === 'sell' ? '出售' : '借用'}</div>
+                    </div>
+                  </div>
+                </div>
+              `).join('') : '<div style="text-align:center;color:var(--color-text-secondary);padding:20px;">暂无正在流转的物品</div>'}
+            </div>
+            
+            <div style="background:var(--color-cream);border-radius:var(--radius-md);padding:18px;margin-bottom:16px;text-align:left;">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+                <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--color-honey);"></i>
+                使用技巧
+              </div>
+              ${detail.tips.map(tip => `
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:13px;color:var(--color-text-secondary);line-height:1.5;">
+                  <span style="color:var(--color-primary);font-weight:600;">•</span>
+                  <span>${tip}</span>
+                </div>
+              `).join('')}
+            </div>
+            
+            <button class="btn btn-primary btn-block" onclick="hideModal()">
+              <i data-lucide="check" style="width:18px;height:18px;"></i>
+              我知道了
+            </button>
           </div>
-          
-          <button class="btn btn-primary btn-block" onclick="hideModal()">
-            <i data-lucide="check" style="width:18px;height:18px;"></i>
-            我知道了
-          </button>
-        </div>
-      `, false);
+        `;
+      } else {
+        content = `
+          <div style="text-align:center;padding:16px 0 24px;">
+            <div style="width:72px;height:72px;background:linear-gradient(135deg,var(--color-primary-soft),var(--color-cream));border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(74,124,92,0.15);">
+              <i data-lucide="${detail.icon}" style="width:36px;height:36px;color:var(--color-primary);"></i>
+            </div>
+            <h3 style="font-size:20px;font-weight:700;color:var(--color-text);margin-bottom:8px;">${detail.title}</h3>
+            <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:24px;">${detail.desc}</p>
+            
+            <div style="background:var(--color-cream);border-radius:var(--radius-md);padding:18px;margin-bottom:16px;text-align:left;">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+                <i data-lucide="lightbulb" style="width:16px;height:16px;color:var(--color-honey);"></i>
+                使用技巧
+              </div>
+              ${detail.tips.map(tip => `
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:13px;color:var(--color-text-secondary);line-height:1.5;">
+                  <span style="color:var(--color-primary);font-weight:600;">•</span>
+                  <span>${tip}</span>
+                </div>
+              `).join('')}
+            </div>
+            
+            <button class="btn btn-primary btn-block" onclick="hideModal()">
+              <i data-lucide="check" style="width:18px;height:18px;"></i>
+              我知道了
+            </button>
+          </div>
+        `;
+      }
+
+      showModal(content, false);
       lucide.createIcons();
     }
 
