@@ -1030,6 +1030,121 @@
       margin-bottom: 16px;
     }
 
+    .chat-input-area {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 12px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--bg-paper);
+      border-radius: 0 0 20px 20px;
+    }
+
+    .chat-input-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      background: var(--bg-paper);
+      border-radius: 20px;
+      padding: 10px 14px;
+      gap: 8px;
+    }
+
+    .chat-input-wrapper textarea {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      color: var(--color-text);
+      resize: none;
+      outline: none;
+      max-height: 120px;
+      line-height: 1.5;
+    }
+
+    .chat-input-wrapper textarea::placeholder {
+      color: var(--color-text-light);
+    }
+
+    .voice-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .voice-btn:hover {
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+    }
+
+    .voice-btn.active {
+      background: var(--color-accent);
+      color: white;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .send-btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 12px rgba(74, 124, 92, 0.3);
+    }
+
+    .send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(74, 124, 92, 0.4);
+    }
+
+    .send-btn:active {
+      transform: scale(0.95);
+    }
+
+    .voice-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+      font-size: 13px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .voice-wave {
+      width: 20px;
+      height: 20px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: voiceWave 1s infinite;
+    }
+
+    @keyframes voiceWave {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
     .ai-loading {
       display: flex;
       align-items: center;
@@ -1231,6 +1346,110 @@
       font-size: 12px;
       color: var(--color-text-secondary);
       margin-top: 2px;
+    }
+
+    /* Idle Tabs */
+    .idle-tabs {
+      display: flex;
+      background: var(--bg-paper);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      margin-bottom: 20px;
+      gap: 4px;
+    }
+
+    .idle-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .idle-tab.active {
+      background: var(--bg-card);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .idle-tab-content {
+      display: none;
+    }
+
+    .idle-tab-content.active {
+      display: block;
+    }
+
+    /* Community Grid */
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .community-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(166, 124, 82, 0.08);
+    }
+
+    .community-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-warm);
+    }
+
+    .community-card-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary-soft) 0%, var(--color-cream) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .community-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .community-card-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-honey);
+      margin-bottom: 4px;
+    }
+
+    .community-card-owner {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    /* Record Card */
+    .record-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 12px;
+      border: 1px solid rgba(166, 124, 82, 0.08);
     }
 
     /* Idle Card */
@@ -5367,9 +5586,109 @@
                 `).join('')}
               </div>
             ` : ''}
+
+            <div class="chat-input-area">
+              <div class="chat-input-wrapper">
+                <textarea id="chatInput" placeholder="描述你遇到的问题..." rows="1" maxlength="300" onkeydown="handleChatInputKeydown(event, '${item.id}')" oninput="autoResizeChatInput(this)"></textarea>
+                <button class="voice-btn" id="voiceBtn" onclick="toggleVoiceInput('${item.id}')" title="语音输入">
+                  <i data-lucide="mic" style="width:20px;height:20px;"></i>
+                </button>
+              </div>
+              <button class="send-btn" onclick="sendChatFromInput('${item.id}')">
+                <i data-lucide="send" style="width:18px;height:18px;"></i>
+              </button>
+            </div>
+            <div id="voiceStatus" class="voice-status" style="display:none;">
+              <div class="voice-wave"></div>
+              <span>正在聆听...</span>
+              <button class="btn btn-sm" onclick="stopVoiceInput()">取消</button>
+            </div>
           </div>
         </div>
       `;
+    }
+
+    function handleChatInputKeydown(event, itemId) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendChatFromInput(itemId);
+      }
+    }
+
+    function autoResizeChatInput(textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+    }
+
+    function sendChatFromInput(itemId) {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      if (message) {
+        sendChatMessage(itemId, message);
+        input.value = '';
+        input.style.height = 'auto';
+      }
+    }
+
+    let voiceRecognition = null;
+    let isVoiceActive = false;
+
+    function toggleVoiceInput(itemId) {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        showToast('您的浏览器不支持语音识别，请使用Chrome浏览器');
+        return;
+      }
+
+      if (isVoiceActive) {
+        stopVoiceInput();
+        return;
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      voiceRecognition = new SpeechRecognition();
+      voiceRecognition.lang = 'zh-CN';
+      voiceRecognition.continuous = false;
+      voiceRecognition.interimResults = false;
+
+      voiceRecognition.onstart = () => {
+        isVoiceActive = true;
+        document.getElementById('voiceBtn').classList.add('active');
+        document.getElementById('voiceStatus').style.display = 'flex';
+      };
+
+      voiceRecognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        const input = document.getElementById('chatInput');
+        input.value = transcript;
+        autoResizeChatInput(input);
+        stopVoiceInput();
+      };
+
+      voiceRecognition.onerror = (event) => {
+        console.error('Voice recognition error:', event.error);
+        stopVoiceInput();
+        if (event.error !== 'no-speech') {
+          showToast('语音识别出错，请重试');
+        }
+      };
+
+      voiceRecognition.onend = () => {
+        stopVoiceInput();
+      };
+
+      voiceRecognition.start();
+    }
+
+    function stopVoiceInput() {
+      if (voiceRecognition) {
+        voiceRecognition.stop();
+        voiceRecognition = null;
+      }
+      isVoiceActive = false;
+      const voiceBtn = document.getElementById('voiceBtn');
+      const voiceStatus = document.getElementById('voiceStatus');
+      if (voiceBtn) voiceBtn.classList.remove('active');
+      if (voiceStatus) voiceStatus.style.display = 'none';
     }
 
     function showItemEncyclopedia(itemId) {
@@ -5863,6 +6182,7 @@
       const myIdle = AppState.idleItems.filter(item => item.owner === '我');
       const neighborIdle = AppState.idleItems.filter(item => item.owner !== '我');
       const myBorrowRequests = AppState.idleItems.reduce((count, item) => count + item.borrowRequests.length, 0);
+      const completedRecords = AppState.idleItems.filter(item => item.status === '已流转' || item.status === '已借出');
 
       return `
         <div class="page active">
@@ -5873,67 +6193,177 @@
             </div>
           </div>
 
-          <div class="page-guide">
-            <i data-lucide="repeat" style="width:14px;height:14px;color:var(--color-secondary);"></i>
-            <span>邻居们的闲置，也许正是你需要的；你的闲置也能帮到别人</span>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-            <div class="widget-card" style="background:linear-gradient(135deg,var(--color-cream) 0%,#FFF5E8 100%);">
-              <div class="widget-card-header">
-                <div class="widget-card-icon" style="background:white;">
-                  <i data-lucide="package" style="width:20px;height:20px;color:var(--color-primary);"></i>
-                </div>
-                <div class="widget-card-title">我的发布</div>
-              </div>
-              <div class="widget-card-value" style="color:var(--color-primary);">${myIdle.length}</div>
-              <div class="widget-card-desc">件闲置物品</div>
-            </div>
-            <div class="widget-card" style="background:linear-gradient(135deg,var(--color-primary-soft) 0%,#D4E8DB 100%);">
-              <div class="widget-card-header">
-                <div class="widget-card-icon" style="background:white;">
-                  <i data-lucide="bell" style="width:20px;height:20px;color:var(--color-sage);"></i>
-                </div>
-                <div class="widget-card-title">借用请求</div>
-              </div>
-              <div class="widget-card-value" style="color:var(--color-sage);">${myBorrowRequests}</div>
-              <div class="widget-card-desc">待处理</div>
-            </div>
-          </div>
-
-          <div class="section-header">
-            <span class="section-title">我的闲置 (${myIdle.length})</span>
-            <button class="btn btn-primary btn-sm" onclick="showPublishIdle()">
-              <i data-lucide="plus" style="width:14px;height:14px;"></i>
-              发布闲置
+          <div class="idle-tabs">
+            <button class="idle-tab active" onclick="switchIdleTab('my')" id="tab-my">
+              <i data-lucide="user" style="width:16px;height:16px;"></i>
+              我的流转
+            </button>
+            <button class="idle-tab" onclick="switchIdleTab('community')" id="tab-community">
+              <i data-lucide="users" style="width:16px;height:16px;"></i>
+              社区广场
+            </button>
+            <button class="idle-tab" onclick="switchIdleTab('records')" id="tab-records">
+              <i data-lucide="file-text" style="width:16px;height:16px;"></i>
+              买卖记录
             </button>
           </div>
 
-          ${myIdle.length > 0 ? myIdle.map(item => renderIdleCard(item)).join('') : `
-            <div class="card" style="background:linear-gradient(135deg,var(--color-cream) 0%,var(--bg-card) 100%);border:none;text-align:center;padding:30px;">
-              <div style="font-size:48px;margin-bottom:14px;">🌿</div>
-              <div style="font-size:15px;font-weight:600;color:var(--color-text);margin-bottom:6px;">还没有闲置物品</div>
-              <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.6;">
-                把家里不常用的物品设为闲置<br>让邻居们也能用得上
+          <!-- Tab 1: 我的流转 -->
+          <div id="idle-content-my" class="idle-tab-content active">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+              <div class="widget-card" style="background:linear-gradient(135deg,var(--color-cream) 0%,#FFF5E8 100%);">
+                <div class="widget-card-header">
+                  <div class="widget-card-icon" style="background:white;">
+                    <i data-lucide="package" style="width:20px;height:20px;color:var(--color-primary);"></i>
+                  </div>
+                  <div class="widget-card-title">我的发布</div>
+                </div>
+                <div class="widget-card-value" style="color:var(--color-primary);">${myIdle.length}</div>
+                <div class="widget-card-desc">件闲置物品</div>
               </div>
-              <button class="btn btn-primary btn-sm" style="margin-top:16px;" onclick="showPublishIdle()">
+              <div class="widget-card" style="background:linear-gradient(135deg,var(--color-primary-soft) 0%,#D4E8DB 100%);">
+                <div class="widget-card-header">
+                  <div class="widget-card-icon" style="background:white;">
+                    <i data-lucide="bell" style="width:20px;height:20px;color:var(--color-sage);"></i>
+                  </div>
+                  <div class="widget-card-title">借用请求</div>
+                </div>
+                <div class="widget-card-value" style="color:var(--color-sage);">${myBorrowRequests}</div>
+                <div class="widget-card-desc">待处理</div>
+              </div>
+            </div>
+
+            <div class="section-header">
+              <span class="section-title">我的闲置 (${myIdle.length})</span>
+              <button class="btn btn-primary btn-sm" onclick="showPublishIdle()">
                 <i data-lucide="plus" style="width:14px;height:14px;"></i>
-                发布第一件
+                发布闲置
               </button>
             </div>
-          `}
 
-          <div class="section-header" style="margin-top:24px;">
-            <span class="section-title">🏠 邻居的闲置</span>
+            ${myIdle.length > 0 ? myIdle.map(item => renderIdleCard(item)).join('') : `
+              <div class="card" style="background:linear-gradient(135deg,var(--color-cream) 0%,var(--bg-card) 100%);border:none;text-align:center;padding:30px;">
+                <div style="font-size:48px;margin-bottom:14px;">🌿</div>
+                <div style="font-size:15px;font-weight:600;color:var(--color-text);margin-bottom:6px;">还没有闲置物品</div>
+                <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.6;">
+                  把家里不常用的物品设为闲置<br>让邻居们也能用得上
+                </div>
+                <button class="btn btn-primary btn-sm" style="margin-top:16px;" onclick="showPublishIdle()">
+                  <i data-lucide="plus" style="width:14px;height:14px;"></i>
+                  发布第一件
+                </button>
+              </div>
+            `}
           </div>
 
-          ${neighborIdle.length > 0 ? neighborIdle.map(item => renderIdleCard(item)).join('') : `
-            <div class="card" style="background:var(--bg-paper);border:none;text-align:center;padding:24px;">
-              <div style="font-size:14px;color:var(--color-text-secondary);">暂无邻居发布闲置物品</div>
+          <!-- Tab 2: 社区广场 -->
+          <div id="idle-content-community" class="idle-tab-content">
+            <div class="search-box" style="margin-bottom:16px;">
+              <i data-lucide="search" style="width:18px;height:18px;color:var(--color-text-secondary);"></i>
+              <input type="text" id="community-search" placeholder="搜索闲置物品..." oninput="filterCommunityItems()" style="flex:1;border:none;background:transparent;font-size:14px;outline:none;margin-left:10px;">
             </div>
-          `}
+
+            <div class="community-grid" id="community-grid">
+              ${neighborIdle.length > 0 ? neighborIdle.map(item => renderCommunityCard(item)).join('') : `
+                <div class="card" style="background:var(--bg-paper);border:none;text-align:center;padding:40px;grid-column:1/-1;">
+                  <div style="font-size:48px;margin-bottom:14px;">🏠</div>
+                  <div style="font-size:15px;font-weight:600;color:var(--color-text);margin-bottom:6px;">暂无邻居发布闲置物品</div>
+                  <div style="font-size:13px;color:var(--color-text-secondary);">成为第一个分享闲置的邻居吧</div>
+                </div>
+              `}
+            </div>
+          </div>
+
+          <!-- Tab 3: 买卖记录 -->
+          <div id="idle-content-records" class="idle-tab-content">
+            <div class="record-summary" style="background:linear-gradient(135deg,var(--color-cream) 0%,var(--bg-card) 100%);border-radius:16px;padding:20px;margin-bottom:20px;">
+              <div style="display:flex;justify-content:space-around;text-align:center;">
+                <div>
+                  <div style="font-size:28px;font-weight:700;color:var(--color-primary);">${completedRecords.length}</div>
+                  <div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;">成功流转</div>
+                </div>
+                <div style="width:1px;background:var(--color-cream-dark);"></div>
+                <div>
+                  <div style="font-size:28px;font-weight:700;color:var(--color-honey);">${completedRecords.filter(r => r.type === '卖').length}</div>
+                  <div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;">成功卖出</div>
+                </div>
+                <div style="width:1px;background:var(--color-cream-dark);"></div>
+                <div>
+                  <div style="font-size:28px;font-weight:700;color:var(--color-sage);">${completedRecords.filter(r => r.type === '借').length}</div>
+                  <div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;">成功借出</div>
+                </div>
+              </div>
+            </div>
+
+            ${completedRecords.length > 0 ? completedRecords.map(item => renderRecordCard(item)).join('') : `
+              <div class="card" style="background:var(--bg-paper);border:none;text-align:center;padding:40px;">
+                <div style="font-size:48px;margin-bottom:14px;">📝</div>
+                <div style="font-size:15px;font-weight:600;color:var(--color-text);margin-bottom:6px;">暂无流转记录</div>
+                <div style="font-size:13px;color:var(--color-text-secondary);">完成第一笔流转后，这里会显示记录</div>
+              </div>
+            `}
+          </div>
         </div>
       `;
+    }
+
+    function switchIdleTab(tab) {
+      document.querySelectorAll('.idle-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.idle-tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('idle-content-' + tab).classList.add('active');
+      lucide.createIcons();
+    }
+
+    function renderCommunityCard(item) {
+      return `
+        <div class="community-card" onclick="navigateTo('idle-detail', {id: '${item.id}'})">
+          <div class="community-card-icon">
+            <i data-lucide="${item.icon || 'package'}" style="width:32px;height:32px;color:var(--color-primary);"></i>
+          </div>
+          <div class="community-card-name">${item.name}</div>
+          <div class="community-card-price">${item.price ? '¥' + item.price : item.type === '借' ? '可借' : '免费'}</div>
+          <div class="community-card-owner">${item.owner}</div>
+        </div>
+      `;
+    }
+
+    function renderRecordCard(item) {
+      const typeIcon = item.type === '卖' ? '💰' : item.type === '借' ? '🤝' : '🎁';
+      const typeColor = item.type === '卖' ? 'var(--color-honey)' : item.type === '借' ? 'var(--color-sage)' : 'var(--color-accent)';
+      return `
+        <div class="record-card">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--color-cream) 0%,var(--bg-paper) 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;">
+              ${typeIcon}
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:15px;font-weight:600;color:var(--color-text);">${item.name}</div>
+              <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px;">
+                ${item.type === '卖' ? '卖给了 ' : item.type === '借' ? '借给了 ' : '送给了 '}${item.buyer || '邻居'} · ${item.completedAt || '最近'}
+              </div>
+            </div>
+            ${item.price ? `<div style="font-size:16px;font-weight:600;color:${typeColor};">¥${item.price}</div>` : ''}
+          </div>
+          <div class="badge badge-success" style="margin-top:12px;">已完成</div>
+        </div>
+      `;
+    }
+
+    function filterCommunityItems() {
+      const searchText = document.getElementById('community-search').value.toLowerCase();
+      const myIdle = AppState.idleItems.filter(item => item.owner !== '我');
+      const filtered = myIdle.filter(item => item.name.toLowerCase().includes(searchText));
+      const grid = document.getElementById('community-grid');
+      if (grid) {
+        grid.innerHTML = filtered.length > 0 ? filtered.map(item => renderCommunityCard(item)).join('') : `
+          <div class="card" style="background:var(--bg-paper);border:none;text-align:center;padding:40px;grid-column:1/-1;">
+            <div style="font-size:48px;margin-bottom:14px;">🔍</div>
+            <div style="font-size:15px;color:var(--color-text-secondary);">没有找到相关物品</div>
+          </div>
+        `;
+        lucide.createIcons();
+      }
     }
 
     function renderIdleCard(item) {
