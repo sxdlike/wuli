@@ -2,10 +2,10 @@
   "name": "wuli-app",
   "version": "1.0.0",
   "description": "物历 WùLì - 物品数字档案 | AI管家 · 闲置流转 · 家庭守护",
-  "main": "server.js",
+  "main": "local-server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node local-server.js",
+    "dev": "node local-server.js"
   },
   "keywords": [
     "物历",
